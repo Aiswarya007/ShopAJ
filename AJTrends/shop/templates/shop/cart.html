@@ -1,0 +1,74 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+<a href="/" style="color: black; text-decoration: none;">
+    <i class="fas fa-home"></i> <!-- This is a Font Awesome Home icon -->
+</a>
+<hr>
+
+<div class="d-flex justify-content-between align-items-center">
+    <h1 style="color: black;">Your Cart</h1>
+    <!-- Optional: Continue Shopping Button -->
+    <!-- <a href="/" class="btn btn-secondary">Continue Shopping</a> -->
+</div>
+
+<!-- Display success messages if any -->
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% if cart_items %}
+    <div class="cart-items">
+        {% for item in cart_items %}
+            <div class="d-flex align-items-center border-bottom py-3">
+                <!-- Product image on the left -->
+                <div class="me-3" style="flex-shrink: 0;">
+                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-fluid" style="width: 100px;">
+                </div>
+
+                <!-- Product details on the right -->
+                <div class="flex-grow-1">
+                    <div class="d-flex align-items-center">
+                        <h4 class="me-3 mb-0">{{ item.product.name }}</h4>
+                        <!-- Remove icon with link on the same line as the product name -->
+                        <a href="{% url 'remove_from_cart' product_id=item.product.id %}">
+                            <img src="{% static 'images/remove_icon.png' %}" alt="Remove" class="img-fluid" style="width: 30px; height: 30px;">
+                        </a>
+                    </div>
+                    <form action="{% url 'update_cart_quantity' item.id %}" method="POST" class="d-inline-block">
+                        {% csrf_token %}
+                        <label for="quantity_{{ item.id }}" class="me-2">Qty:</label>
+                        <select id="quantity_{{ item.id }}" name="quantity" class="form-select" onchange="this.form.submit()">
+                            <option value="" disabled>Select Quantity</option>
+                            {% for i in 10|range_filter %}
+                                <option value="{{ i }}" {% if item.quantity == i %}selected{% endif %}>{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                    <p><strong>${{ item.product.price }}</strong></p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h3>Total: ${{ total }}</h3>
+
+    <!-- Place Order Form -->
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="place_order">
+        <button type="submit" class="btn btn-primary" style="background-color: black; color: white;">Place Order</button>
+    </form>
+
+{% else %}
+    <p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Mon Nov 25 17:13:07 IST 2024","Mon Nov 25 17:13:10 IST 2024","2506","","","","","","Search for a non-existing product",""
+"passed","Mon Nov 25 17:13:10 IST 2024","Mon Nov 25 17:13:12 IST 2024","2346","","","","","","Perform a search with an empty search bar",""
+"passed","Mon Nov 25 17:13:04 IST 2024","Mon Nov 25 17:13:07 IST 2024","3456","","","","","","Search for an existing product",""

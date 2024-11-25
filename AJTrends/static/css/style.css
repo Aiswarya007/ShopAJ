@@ -1,0 +1,18 @@
+/* Cart icon styling */
+.cart-icon {
+    position: fixed;         /* Fix position relative to the viewport */
+    top: 20px;               /* Distance from the top of the screen */
+    right: 20px;             /* Distance from the right side of the screen */
+    width: 40px;             /* Set width of the icon */
+    height: 40px;            /* Set height of the icon */
+    cursor: pointer;        /* Change cursor to pointer on hover */
+}
+
+/* Success alert styling */
+.alert-success {
+    background-color: LightSlateGray !important; /* Set background to a soft purple */
+    color: white !important;;                    /* Ensure text is white for readability */
+    border: 1px solid DarkGray;                 /* Border color to complement the purple */
+    padding: 10px;                              /* Add padding inside the alert */
+    border-radius: 5px;                         /* Round the corners of the alert box */
+}
